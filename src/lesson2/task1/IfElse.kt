@@ -96,7 +96,7 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
 fun rookOrBishopThreatens(kingX: Int, kingY: Int,
                           rookX: Int, rookY: Int,
                           bishopX: Int, bishopY: Int): Int = when {
-        kingX==rookX || kingY==rookY && Math.abs(kingX-bishopX)==Math.abs(kingY-bishopY) -> 3
+        (kingX==rookX || kingY==rookY) && Math.abs(kingX-bishopX)==Math.abs(kingY-bishopY) -> 3
         Math.abs(kingX-bishopX)==Math.abs(kingY-bishopY) -> 2
         kingX==rookX || kingY==rookY -> 1
         else -> 0
@@ -127,9 +127,9 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = when {
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = when {
     a==c || b==c -> 0
-    b>=d && a<=c -> d - c
-    a>=c && d>=b -> b - a
-    b in c..d -> b - c
-    a in c ..d -> d - a
+    b>=d && a<=c -> Math.abs(d - c)
+    a>=c && d>=b -> Math.abs(b - a)
+    b in c..d -> Math.abs(b - c)
+    a in c ..d -> Math.abs(d - a)
     else -> -1
 }
