@@ -126,7 +126,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = when {
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = when {
-    a==c || b==c -> 0
+    ((a==c)&&(b>d)) || ((b==c)&&(b<d)) -> 0
     b>=d && a<=c -> Math.abs(d - c)
     a>=c && d>=b -> Math.abs(b - a)
     b in c..d -> Math.abs(b - c)
