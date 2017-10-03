@@ -110,7 +110,8 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = when {
+fun triangleKind(a: Double, b: Double, c: Double): Int =
+    when {
     a+b<c ||a+c<b || b+c<a -> -1
     sqr(a)+sqr(b)==sqr(c) || sqr(b)+sqr(c)==sqr(a) || sqr(c)+sqr(a)==sqr(b) ->1
     sqr(a)+sqr(b)<sqr(c) || sqr(b)+sqr(c)<sqr(a) || sqr(c)+sqr(a)<sqr(b) ->2
@@ -125,7 +126,8 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = when {
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = when {
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int =
+    when {
     ((a==c)&&(b>d)) || ((b==c)&&(b<d)) -> 0
     b>=d && a<=c -> Math.abs(d - c)
     a>=c && d>=b -> Math.abs(b - a)
