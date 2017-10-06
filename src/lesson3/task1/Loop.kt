@@ -66,7 +66,7 @@ fun digitNumber(n: Int): Int {
     do {
         a /= 10
         number += 1}
-        while (a>0)
+        while (Math.abs(a)>0)
     return number
 }
 
@@ -133,7 +133,7 @@ fun maxDivisor(n: Int): Int {
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    if (n<2 && m<2) return false
+    if (n==1 && m==1) return true
     for (i in 2..n+m) {
         if (n%i==0 && m%i==0) return false
     }
@@ -148,7 +148,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
-    for (i in 1..n+m)
+    for (i in 0..n+m)
         if (i*i in m..n) return true
         return false
 }
