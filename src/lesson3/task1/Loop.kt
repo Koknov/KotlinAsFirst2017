@@ -65,7 +65,8 @@ fun digitNumber(n: Int): Int {
     var a = n
     do {
         a /= 10
-        number += 1}
+        number += 1
+    }
         while (Math.abs(a)>0)
     return number
 }
@@ -77,8 +78,8 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int  {
-    if (n == 1 || n == 2) return 1
-    else return (fib(n - 2) + fib(n - 1))
+    return if (n == 1 || n == 2) 1
+    else (fib(n - 2) + fib(n - 1))
 }
 
 
@@ -180,8 +181,9 @@ fun cos(x: Double, eps: Double): Double = TODO()
 fun revert(n: Int): Int {
     var number = n
     var reverse = 0
+    var a : Int
     while (number > 0) {
-       var a = number % 10
+        a = number % 10
         reverse = a + reverse * 10
         number /= 10
     }
@@ -198,7 +200,7 @@ fun revert(n: Int): Int {
 fun isPalindrome(n: Int): Boolean {
     var number = n
     var reverse = 0
-    var a = 0
+    var a : Int
     while (number > 0) {
         a = number % 10
         reverse = a + reverse * 10
@@ -229,7 +231,21 @@ fun hasDifferentDigits(n: Int): Boolean {
  * 149162536496481100121144...
  * Например, 2-я цифра равна 4, 7-я 5, 12-я 6.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var a = 0
+    var b = 0
+    var c: Int
+    while (a<n) {
+        b += 1
+        a += digitNumber(b*b)
+    }
+    c= b*b
+    for (k in 1.. a-n) {
+        c /= 10
+    }
+    return c % 10
+}
+
 
 /**
  * Сложная
