@@ -3,6 +3,8 @@ package lesson2.task1
 
 import lesson1.task1.discriminant
 import lesson1.task1.sqr
+
+
 /**
  * Пример
  *
@@ -115,13 +117,31 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int =
-    when {
-    a + b < c || a + c < b || b + c < a -> -1
-    sqr(a) + sqr(b) == sqr(c) || sqr(b) + sqr(c) == sqr(a) || sqr(c) + sqr(a) == sqr(b) -> 1
-    sqr(a) + sqr(b) < sqr(c) || sqr(b) + sqr(c) < sqr(a) || sqr(a) + sqr(c) < sqr(c) -> 2
-    else -> 0
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    var max = 0.0
+    var min1 = 0.0
+    var min2= 0.0
+    if (a >= b && a >= c) {
+        max = a
+        min1 = b
+        min2 = c        }
+    if (b >= a && b >= c) {
+        max = b
+        min1 = a
+        min2 = c
+                        }
+    if (c >= b && c >= a) {
+        max = c
+        min1 = b
+        min2 = a        }
+    return when {
+        a + b < c || a + c < b || b + c <  a -> -1
+        sqr(max) == sqr(min1) + sqr(min2) -> 1
+        sqr(max) > sqr(min1) + sqr(min2) -> 2
+        else -> 0
+    }
 }
+
 
 /**
  * Средняя
