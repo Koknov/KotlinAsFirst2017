@@ -22,7 +22,7 @@ fun isNumberHappy(number: Int): Boolean {
     val b = number / 100 % 10
     val c = number / 10 % 10
     val d = number % 10
-    return a+b == c+d
+    return a + b == c + d
 }
 
 /**
@@ -33,7 +33,7 @@ fun isNumberHappy(number: Int): Boolean {
  * Считать, что ферзи не могут загораживать друг друга.
  */
 fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
-        (x1 == x2) || (y1 == y2) || (Math.abs(x1-x2)==Math.abs(y1-y2))
+        x1 == x2 || y1 == y2 || Math.abs(x1 - x2) == Math.abs(y1 - y2)
 
 /**
  * Средняя
@@ -43,7 +43,9 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
  * Вернуть true, если утверждение верно
  */
 fun circleInside(x1: Double, y1: Double, r1: Double,
-                 x2: Double, y2: Double, r2: Double): Boolean = Math.sqrt(sqr(x2-x1)+sqr(y2-y1))+r1<=r2
+                 x2: Double, y2: Double, r2: Double): Boolean {
+    return Math.sqrt(sqr(x2 - x1) + sqr(y2 - y1)) + r1 <= r2
+}
 
 /**
  * Средняя
@@ -55,7 +57,5 @@ fun circleInside(x1: Double, y1: Double, r1: Double,
  * Вернуть true, если кирпич пройдёт
  */
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
-if (((r>=a)&&(s>=b)) || ((s>=a)&&(r>=c)) || ((r>=b)&&(s>=c)) || ((s>=a)&&(r>=b)) || ((r>=a)&&(s>=c)) || ((s>=b)&&(r>=c)))
-    return true
-    else return false
+    return ((r >= a) && (s >= b)) || ((s >= a) && (r >= c)) || ((r >= b) && (s >= c)) || ((s >= a) && (r >= b)) || ((r >= a) && (s >= c)) || ((s >= b) && (r >= c))
 }

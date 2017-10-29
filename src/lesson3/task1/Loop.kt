@@ -66,8 +66,8 @@ fun digitNumber(n: Int): Int {
     do {
         a /= 10
         number += 1
-    }
-        while (Math.abs(a)>0)
+       }
+        while (Math.abs(a) > 0)
     return number
 }
 
@@ -91,10 +91,10 @@ fun fib(n: Int): Int  {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    var mink = m*n
-    for (i in 1 .. m*n)
-        if ((i%m==0)&&(i%n==0)&&(mink>i))  mink = i
-    return mink
+    var minK = m * n
+    for (i in 1 .. m * n)
+        if ((i % m == 0)&&(i % n == 0)&&(minK > i))  minK = i
+    return minK
 }
 
 /**
@@ -103,12 +103,12 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var mind = 2
+    var minD = 2
     for (i in 2..n) {
-        mind = i
-        if (n%i == 0) break
-    }
-    return mind
+        minD = i
+        if (n % i == 0) break
+                         }
+    return minD
 }
 
 
@@ -118,12 +118,12 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    var maxd = 0
-    for (i in n-1 downTo 1 ) {
-        maxd = i
-        if (n%i==0) break
-    }
-    return maxd
+    var maxD = 0
+    for (i in n - 1 downTo 1 ) {
+        maxD = i
+        if (n % i == 0) break
+                                    }
+    return maxD
 }
 
 /**
@@ -134,10 +134,10 @@ fun maxDivisor(n: Int): Int {
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    if (n==1 && m==1) return true
-    for (i in 2..n+m) {
-        if (n%i==0 && m%i==0) return false
-    }
+    if (n == 1 && m == 1) return true
+    for (i in 2..n + m) {
+        if (n % i == 0 && m % i == 0) return false
+                             }
     return true
 }
 
@@ -150,7 +150,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
       for(i in Math.sqrt(m.toDouble()).toInt()..Math.sqrt(n.toDouble()).toInt())
-        if (i*i in m..n) return true
+        if (i * i in m..n) return true
         return false
 }
 
@@ -181,12 +181,11 @@ fun cos(x: Double, eps: Double): Double = TODO()
 fun revert(n: Int): Int {
     var number = n
     var reverse = 0
-    var a : Int
     while (number > 0) {
-        a = number % 10
+        var a = number % 10
         reverse = a + reverse * 10
         number /= 10
-    }
+                       }
     return reverse
 }
 
@@ -198,15 +197,7 @@ fun revert(n: Int): Int {
  * 15751 -- палиндром, 3653 -- нет.
  */
 fun isPalindrome(n: Int): Boolean {
-    var number = n
-    var reverse = 0
-    var a : Int
-    while (number > 0) {
-        a = number % 10
-        reverse = a + reverse * 10
-        number /= 10
-    }
-    return reverse == n
+      return revert(n) == n
 }
 
 /**
@@ -235,12 +226,12 @@ fun squareSequenceDigit(n: Int): Int {
     var a = 0
     var b = 0
     var c: Int
-    while (a<n) {
+    while (a < n) {
         b += 1
-        a += digitNumber(b*b)
+        a += digitNumber(b * b)
     }
     c= b*b
-    for (k in 1.. a-n) {
+    for (k in 1.. a - n) {
         c /= 10
     }
     return c % 10
