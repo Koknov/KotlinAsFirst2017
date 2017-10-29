@@ -119,7 +119,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int =
     when {
     a + b < c || a + c < b || b + c < a -> -1
     sqr(a) + sqr(b) == sqr(c) || sqr(b) + sqr(c) == sqr(a) || sqr(c) + sqr(a) == sqr(b) -> 1
-    sqr(a) + sqr(b) < sqr(c) || sqr(b) + sqr(c) < sqr(a) -> 2
+    sqr(a) + sqr(b) < sqr(c) || sqr(b) + sqr(c) < sqr(a) || sqr(a) + sqr(c) < sqr(c) -> 2
     else -> 0
 }
 
