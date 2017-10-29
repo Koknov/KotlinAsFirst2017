@@ -93,7 +93,8 @@ fun fib(n: Int): Int  {
 fun lcm(m: Int, n: Int): Int {
     var minK = m * n
     for (i in 1 .. m * n)
-        if ((i % m == 0)&&(i % n == 0)&&(minK > i))  minK = i
+        if ((i % m == 0)&&(i % n == 0)&&(minK > i))
+            minK = i
     return minK
 }
 
