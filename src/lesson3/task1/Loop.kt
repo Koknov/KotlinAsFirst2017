@@ -237,7 +237,7 @@ fun squareSequenceDigit(n: Int): Int {
         a += digitNumber(b * b)
     }
     var c= b * b
-    for (k in 1.. a - n)
+    for (k in 1 .. a - n)
         c /= 10
     return c % 10
 }
@@ -250,4 +250,15 @@ fun squareSequenceDigit(n: Int): Int {
  * 1123581321345589144...
  * Например, 2-я цифра равна 1, 9-я 2, 14-я 5.
  */
-fun fibSequenceDigit(n: Int): Int= TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var a = 0
+    var b = 0
+    while (a < n) {
+        b += 1
+        a += digitNumber(fib(b))
+    }
+    var c= fib(b)
+    for (k in 1 .. a - n)
+        c /= 10
+    return c % 10
+}
