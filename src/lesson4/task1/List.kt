@@ -126,12 +126,9 @@ fun abs(v: List<Double>): Double {
 fun mean(list: List<Double>): Double {
     if (list.isEmpty()) return 0.0
     var sum = 0.0
-    var num = 0
-    for (i in 0 until list.size) {
+    for (i in 0 until list.size)
         sum += list[i]
-        num += 1
-                                      }
-    return sum / num
+    return sum / list.size
 }
 
 /**
@@ -209,11 +206,13 @@ fun factorize(n: Int): List<Int> {
     val result = mutableListOf<Int>()
     var a = 2
     while (num > 1)   {
-            while (num % a == 0) {
-                 result.add(a)
-                 num /= a        }
-                 a ++ }
-    return result.sorted()
+        while (num % a == 0) {
+            result.add(a)
+            num /= a
+        }
+        a ++
+    }
+    return result
 }
 
 /**
@@ -222,9 +221,7 @@ fun factorize(n: Int): List<Int> {
  * Разложить заданное натуральное число n > 1 на простые множители.
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  */
-fun factorizeToString(n: Int): String {
-    return factorize(n).joinToString (separator = "*")
-}
+fun factorizeToString(n: Int): String = factorize(n).joinToString (separator = "*")
 
 
 /**
@@ -234,7 +231,15 @@ fun factorizeToString(n: Int): String {
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
+fun convert(n: Int, base: Int): List<Int> {
+    var num2 = n
+    val a = mutableListOf<Int>()
+    while (num2 > 0) {
+        a.add(num2 % base)
+        num2 /= base
+    }
+    return a.asReversed()
+}
 
 /**
  * Сложная
@@ -245,6 +250,9 @@ fun convert(n: Int, base: Int): List<Int> = TODO()
  * Например: n = 100, base = 4 -> 1210, n = 250, base = 14 -> 13c
  */
 fun convertToString(n: Int, base: Int): String = TODO()
+
+
+
 
 /**
  * Средняя

@@ -67,7 +67,7 @@ fun digitNumber(n: Int): Int {
         a /= 10
         number += 1
     }
-        while (Math.abs(a) > 0)
+    while (Math.abs(a) > 0)
     return number
 }
 
@@ -103,7 +103,7 @@ fun lcm(m: Int, n: Int): Int {
         a = i
         if (m % i == 0 && n % i == 0) break
     }
-            return m * n / a
+    return m * n / a
 }
 
 /**
@@ -144,7 +144,7 @@ fun maxDivisor(n: Int): Int {
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
     if (n == 1 && m == 1) return true
-    for (i in 2.. m) {
+    for (i in 2.. n) {
         if (n % i == 0 && m % i == 0) return false
     }
     return true
@@ -214,7 +214,7 @@ fun isPalindrome(n: Int): Boolean = revert(n) == n
  * Например, 54 и 323 состоят из разных цифр, а 111 и 0 из одинаковых.
  */
 fun hasDifferentDigits(n: Int): Boolean {
-    if (n%10==n) return false
+    if (n % 10 == n) return false
     var number = n
     while (number>9) {
         if (number%10!=number/10%10) return true
@@ -236,7 +236,7 @@ fun squareSequenceDigit(n: Int): Int {
         b += 1
         a += digitNumber(b * b)
     }
-    var c= b * b
+    var c = b * b
     for (k in 1 .. a - n)
         c /= 10
     return c % 10
@@ -257,7 +257,7 @@ fun fibSequenceDigit(n: Int): Int {
         b += 1
         a += digitNumber(fib(b))
     }
-    var c= fib(b)
+    var c = fib(b)
     for (k in 1 .. a - n)
         c /= 10
     return c % 10

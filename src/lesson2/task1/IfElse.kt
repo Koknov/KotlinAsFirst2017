@@ -59,7 +59,7 @@ fun timeForHalfWay(t1: Double, v1: Double,
     return when {
         s1 >= s -> s / v1
         s2 + s1 > s -> t1 + (s - s1) / v2
-    else -> t1 + t2 + (s - s1 - s2) / v3
+        else -> t1 + t2 + (s - s1 - s2) / v3
     }
 }
 
@@ -76,14 +76,21 @@ fun timeForHalfWay(t1: Double, v1: Double,
  */
 fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX1: Int, rookY1: Int,
-                       rookX2: Int, rookY2: Int): Int = when {
-                           kingX == rookX1 && (kingX == rookX2 || kingY == rookY1 || kingY == rookY2) -> 3
-                           kingY == rookY1 && (kingY == rookY2 || kingX == rookX2)-> 3
-                           kingX == rookX2 && kingY == rookY2 -> 3
-                           kingX == rookX1 || kingY == rookY1 -> 1
-                           kingX == rookX2 || kingY == rookY2 -> 2
-                           else -> 0
-                       }
+                       rookX2: Int, rookY2: Int): Int {
+    val a = kingX == rookX1
+    val b = kingX == rookX2
+    val c = kingY == rookY1
+    val d = kingY == rookY2
+    return when {
+        a && (b || c || d) -> 3
+        c && (d || b) -> 3
+        b && d -> 3
+        a || c -> 1
+        b || d -> 2
+        else -> 0
+    }
+}
+
 /**
  * Простая
  *
@@ -100,7 +107,7 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
     val a = Math.abs(kingX - bishopX)
     val b = Math.abs(kingY - bishopY)
     val c = kingX == rookX || kingY == rookY
-   return  when {
+    return when {
         c && a == b -> 3
         a == b -> 2
         c -> 1
@@ -118,7 +125,7 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
 fun triangleKind(a: Double, b: Double, c: Double): Int {
     var max = 0.0
     var min1 = 0.0
-    var min2= 0.0
+    var min2 = 0.0
     if (a >= b && a >= c) {
         max = a
         min1 = b
