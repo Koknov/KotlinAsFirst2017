@@ -2,8 +2,8 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
-import java.io.File.separator
 import java.lang.Math.pow
+
 
 /**
  * Пример
@@ -250,7 +250,15 @@ fun convert(n: Int, base: Int): List<Int> {
  * строчными буквами: 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: n = 100, base = 4 -> 1210, n = 250, base = 14 -> 13c
  */
-fun convertToString(n: Int, base: Int): String = TODO()
+fun convertToString(n: Int, base: Int): String {
+    val a = convert(n,base)
+    val b = mutableListOf<String>()
+    for (i in 0 until a.size)
+        if (a[i] > 9)
+            b.add((a[i] + 87).toChar().toString())
+        else b.add(a[i].toString())
+    return b.joinToString(separator = "")
+}
 
 
 
@@ -262,7 +270,13 @@ fun convertToString(n: Int, base: Int): String = TODO()
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+fun decimal(digits: List<Int>, base: Int): Int {
+    var num = 0.0
+    val a = digits.reversed()
+    for (i in 0 until a.size)
+        num += a[i] * pow(base.toDouble(),i.toDouble())
+    return num.toInt()
+}
 
 /**
  * Сложная
@@ -273,7 +287,14 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  * 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: str = "13c", base = 14 -> 250
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
+fun decimalFromString(str: String, base: Int): Int {
+    val a = mutableListOf<Int>()
+    for (char in str)
+        if (char in 'a'..'z')
+            a.add((char - 87).toInt())
+        else a.add(char.toString().toInt())
+    return decimal(a,base)
+}
 
 /**
  * Сложная
@@ -293,3 +314,4 @@ fun roman(n: Int): String = TODO()
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
 fun russian(n: Int): String = TODO()
+
