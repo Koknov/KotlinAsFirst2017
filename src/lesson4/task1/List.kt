@@ -5,6 +5,7 @@ import lesson1.task1.discriminant
 import java.lang.Math.pow
 
 
+
 /**
  * Пример
  *
@@ -210,7 +211,7 @@ fun factorize(n: Int): List<Int> {
             result.add(a)
             num /= a
         }
-        a ++
+        a++
     }
     return result
 }
@@ -274,7 +275,7 @@ fun decimal(digits: List<Int>, base: Int): Int {
     var num = 0.0
     val a = digits.reversed()
     for (i in 0 until a.size)
-        num += a[i] * pow(base.toDouble(),i.toDouble())
+        num += a[i] * pow(base.toDouble() , i.toDouble())
     return num.toInt()
 }
 
@@ -291,8 +292,8 @@ fun decimalFromString(str: String, base: Int): Int {
     val a = mutableListOf<Int>()
     for (char in str)
         if (char in 'a'..'z')
-            a.add((char - 87).toInt())
-        else a.add(char.toString().toInt())
+            a.add(char - 'a' + 10)
+        else a.add(char - '0')
     return decimal(a,base)
 }
 
@@ -304,8 +305,22 @@ fun decimalFromString(str: String, base: Int): Int {
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun roman(n: Int): String = TODO()
-
+fun roman(n: Int): String {
+    val roman = listOf("M", "CM","D","CD","C","XC","L","XL","X","IX","V","IV","I")
+    val digits = listOf(1000,900,500,400,100,90,50,40,10,9,5,4,1)
+    var result = ""
+    var a = 0
+    var num = n
+    while (num > 0) {
+        if (num >= digits[a]) {
+            result += roman[a]
+            num -= digits[a]
+        }
+        else
+            a++
+    }
+    return result
+}
 /**
  * Очень сложная
  *

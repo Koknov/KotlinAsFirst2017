@@ -82,9 +82,7 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
     val c = kingY == rookY1
     val d = kingY == rookY2
     return when {
-        a && (b || c || d) -> 3
-        c && (d || b) -> 3
-        b && d -> 3
+        (a && (b || c || d)) || (c && (d || b)) || (b && d) -> 3
         a || c -> 1
         b || d -> 2
         else -> 0
@@ -123,26 +121,16 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    var max = 0.0
-    var min1 = 0.0
-    var min2 = 0.0
-    if (a >= b && a >= c) {
-        max = a
-        min1 = b
-        min2 = c
-    }
-    if (b >= a && b >= c) {
-        max = b
-        min1 = a
-        min2 = c
-    }
-    if (c >= b && c >= a) {
-        max = c
-        min1 = b
-        min2 = a
-    }
+    val result = mutableListOf<Double>()
+    result.add(a)
+    result.add(b)
+    result.add(c)
+    result.sort()
+    val max = result[2]
+    val min1 = result[0]
+    val min2 = result[1]
     return when {
-        a + b < c || a + c < b || b + c <  a -> -1
+        a + b < c || a + c < b || b + c < a -> -1
         sqr(max) == sqr(min1) + sqr(min2) -> 1
         sqr(max) > sqr(min1) + sqr(min2) -> 2
         else -> 0

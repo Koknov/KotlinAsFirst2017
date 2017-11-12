@@ -144,7 +144,7 @@ fun maxDivisor(n: Int): Int {
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
     if (n == 1 && m == 1) return true
-    for (i in 2.. n) {
+    for (i in 2.. minOf(m,n)) {
         if (n % i == 0 && m % i == 0) return false
     }
     return true
