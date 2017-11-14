@@ -76,7 +76,7 @@ fun dateStrToDigit(str: String): String {
         val month = months.indexOf(parts[1])
         val year = parts[2].toInt()
         return if (parts[1] in months)
-            String.format("%02d.%02d.%02d", day, month, year)
+            String.format("%02d.%02d.%d", day, month, year)
         else
             ""
     }
@@ -127,6 +127,7 @@ fun flattenPhoneNumber(phone: String): String {
     val sim = listOf(" ","+","-","(",")").toString()
     val parts = phone.split(" ","-","(",")").toString()
     var result = ""
+    if (phone == "") return ""
     if (phone[0] == '+')
         result += '+'
     for (part in parts) {
