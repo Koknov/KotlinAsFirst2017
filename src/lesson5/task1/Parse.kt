@@ -128,6 +128,8 @@ fun flattenPhoneNumber(phone: String): String {
     val parts = phone.split(" ","-","(",")").toString()
     var result = ""
     if (phone == "") return ""
+    if ("]" in phone) return ""
+    if ("[" in phone) return ""
     if (phone[0] == '+')
         result += '+'
     for (part in parts) {
