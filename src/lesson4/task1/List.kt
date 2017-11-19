@@ -238,8 +238,7 @@ fun convert(n: Int, base: Int): List<Int> {
     do {
         a.add(num2 % base)
         num2 /= base
-    }
-    while (num2 > 0)
+    } while (num2 > 0)
     return a.asReversed()
 }
 
@@ -254,10 +253,10 @@ fun convert(n: Int, base: Int): List<Int> {
 fun convertToString(n: Int, base: Int): String {
     val a = convert(n,base)
     val b = mutableListOf<String>()
-    for (i in 0 until a.size)
-        if (a[i] > 9)
-            b.add((a[i] + 87).toChar().toString())
-        else b.add(a[i].toString())
+    for (char in a)
+        if (char > 9)
+            b.add(('W' + char).toString())
+        else b.add(char.toString())
     return b.joinToString(separator = "")
 }
 
@@ -275,7 +274,7 @@ fun decimal(digits: List<Int>, base: Int): Int {
     var num = 0.0
     val a = digits.reversed()
     for (i in 0 until a.size)
-        num += a[i] * pow(base.toDouble() , i.toDouble())
+        num += a[i] * pow(base.toDouble(), i.toDouble())
     return num.toInt()
 }
 
