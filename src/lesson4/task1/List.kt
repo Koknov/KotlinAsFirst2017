@@ -2,6 +2,7 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
+import java.io.File.separator
 import java.lang.Math.pow
 
 
@@ -305,7 +306,7 @@ fun decimalFromString(str: String, base: Int): Int {
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
 fun roman(n: Int): String {
-    val roman = listOf("M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I")
+    val roman = listOf("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
     val digits = listOf(1000,900,500,400,100,90,50,40,10,9,5,4,1)
     var result = ""
     var a = 0
@@ -327,5 +328,42 @@ fun roman(n: Int): String {
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String {
+    val first  = listOf("", "один","два", "три", "четыре", "пять", "шесть", "семь" , "восемь", "девять")
+    val second = listOf("", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать",
+            "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать")
+    val third = listOf("", "десять", "двадцать", "тридцать", "сорок", "пятьдесят",
+            "шестьдесят", "семьдесят", "восемьдесят", "девяносто")
+    val fourth = listOf("", "сто", "двести", "триста", "четыреста", "пятьсот",
+            "шестьсот", "семьсот", "восемьсот", "девятьсот")
+    var num = n
+    val result = mutableListOf<String>()
+    if (n % 100 in 11 .. 19)
+        result.add(second[n % 10])
+    else {
+        result.add(first[n % 10])
+        result.add(third[(n % 100) / 10])
+    }
+    result.add(fourth[(n % 1000) / 100])
+    num /= 1000
+    if (num != 0) {
+        when (num % 10) {
+            1 -> result.add("одна тысяча")
+            2 -> result.add("две тысячи")
+            3 -> result.add("три тысячи")
+            4 -> result.add("четыре тысячи")
+            else -> result.add("тысяч")
+        }
+        if (num % 100 in 11..19)
+            result.add(second[num % 10])
+        else {
+            if (num % 10 !in 1..4)
+            result.add(first[num % 10])
+            result.add(third[(num % 100) / 10])
+        }
+    }
+    result.add(fourth[(num % 1000) / 100])
+    result.reverse()
+    return result.filter { it != "" }.joinToString(separator = " ")
+}
 

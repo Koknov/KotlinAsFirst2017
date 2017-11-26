@@ -67,8 +67,8 @@ fun main(args: Array<String>) {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateStrToDigit(str: String): String {
-    val months = listOf("","января","февраля","марта","апреля","мая","июня",
-                        "июля","августа","сентября","октября","ноября","декабря")
+    val months = listOf("", "января", "февраля", "марта", "апреля", "мая", "июня",
+            "июля", "августа", "сентября", "октября", "ноября", "декабря")
     val parts = str.split(" ")
     try {
         if(parts.size != 3) return ""
@@ -93,8 +93,8 @@ fun dateStrToDigit(str: String): String {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateDigitToStr(digital: String): String {
-    val months = listOf("","января","февраля","марта","апреля","мая","июня",
-                        "июля","августа","сентября","октября","ноября","декабря")
+    val months = listOf("", "января", "февраля", "марта", "апреля", "мая", "июня",
+            "июля", "августа", "сентября", "октября", "ноября", "декабря")
     val parts = digital.split(".")
     try {
         if (parts.size != 3) return ""
@@ -185,7 +185,7 @@ fun bestHighJump(jumps: String): Int {
             if (parts[i].any {it == '+'})
                 if (parts[i - 1].matches(Regex("\\d+")))
                     if (max < parts[i - 1].toInt())
-                        max = parts[i- 1].toInt()
+                        max = parts[i - 1].toInt()
         }
         catch (e: NumberFormatException) {
             if (parts[i] != "") return -1
