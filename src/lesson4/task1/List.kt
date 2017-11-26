@@ -347,18 +347,21 @@ fun russian(n: Int): String {
     result.add(fourth[(n % 1000) / 100])
     num /= 1000
     if (num != 0) {
-        when (num % 10) {
-            1 -> result.add("одна тысяча")
-            2 -> result.add("две тысячи")
-            3 -> result.add("три тысячи")
-            4 -> result.add("четыре тысячи")
-            else -> result.add("тысяч")
+        if (num%100 !in 11..14) {
+            when (num % 10) {
+                1 -> result.add("одна тысяча")
+                2 -> result.add("две тысячи")
+                3 -> result.add("три тысячи")
+                4 -> result.add("четыре тысячи")
+                else -> result.add("тысяч")
+            }
         }
+        else result.add("тысяч")
         if (num % 100 in 11..19)
             result.add(second[num % 10])
         else {
             if (num % 10 !in 1..4)
-            result.add(first[num % 10])
+                result.add(first[num % 10])
             result.add(third[(num % 100) / 10])
         }
     }
