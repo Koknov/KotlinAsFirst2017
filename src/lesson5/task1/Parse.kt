@@ -67,7 +67,7 @@ fun main(args: Array<String>) {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateStrToDigit(str: String): String {
-    val months = listOf("","января","февраля","марта","апреля","мая", "июня",
+    val months = listOf("","января","февраля","марта","апреля","мая","июня",
                         "июля","августа","сентября","октября","ноября","декабря")
     val parts = str.split(" ")
     try {
@@ -93,12 +93,13 @@ fun dateStrToDigit(str: String): String {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateDigitToStr(digital: String): String {
-    val months = listOf("","января","февраля","марта","апреля","мая", "июня",
+    val months = listOf("","января","февраля","марта","апреля","мая","июня",
                         "июля","августа","сентября","октября","ноября","декабря")
     val parts = digital.split(".")
     try {
         if (parts.size != 3) return ""
         if ("00" in parts) return ""
+        if (parts[1].toInt() !in 1..12) return ""
         val day = parts[0].toInt()
         val month = months[parts[1].toInt()]
         val year = parts[2].toInt()
@@ -127,9 +128,9 @@ fun flattenPhoneNumber(phone: String): String {
     val sym = listOf(' ','+','-','(',')')
     var result = ""
     if (phone == "") return ""
-    if (phone[0] == '+')
-        result += '+'
     for (char in phone) {
+        if (char == '+')
+            result += char
         if (char in '0'..'9')
             result += char
         else if (char !in sym)
@@ -149,7 +150,7 @@ fun flattenPhoneNumber(phone: String): String {
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
 fun bestLongJump(jumps: String): Int {
-    val parts = jumps.split(" ", "%", "-")
+    val parts = jumps.split(" ","-","%")
     var max = -1
     for (part in parts) {
         try {
@@ -177,17 +178,17 @@ fun bestLongJump(jumps: String): Int {
 
 
 fun bestHighJump(jumps: String): Int {
-    val parts = jumps.split(" ","-","%")
+    val parts = jumps.split(" ")
     var max = -1
     for (i in 0 until parts.size)
         try {
-            if (parts[i] == "+")
-                if(parts[i - 1] in "0".."9")
+            if (parts[i].any {it == '+'})
+                if (parts[i - 1].matches(Regex("\\d+")))
                     if (max < parts[i - 1].toInt())
-                        max = parts[i - 1].toInt()
+                        max = parts[i- 1].toInt()
         }
         catch (e: NumberFormatException) {
-            if (parts[i] != "") return -2
+            if (parts[i] != "") return -1
         }
     return max
 }

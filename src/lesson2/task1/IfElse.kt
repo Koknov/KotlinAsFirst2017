@@ -82,7 +82,7 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
     val c = kingY == rookY1
     val d = kingY == rookY2
     return when {
-        (a || c) && (b || d)-> 3
+        (a || c) && (b || d) -> 3
         a || c -> 1
         b || d -> 2
         else -> 0

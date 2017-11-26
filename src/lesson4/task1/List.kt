@@ -251,7 +251,7 @@ fun convert(n: Int, base: Int): List<Int> {
  * Например: n = 100, base = 4 -> 1210, n = 250, base = 14 -> 13c
  */
 fun convertToString(n: Int, base: Int): String {
-    val a = convert(n,base)
+    val a = convert(n, base)
     val b = mutableListOf<String>()
     for (char in a)
         if (char > 9)
@@ -293,7 +293,7 @@ fun decimalFromString(str: String, base: Int): Int {
         if (char in 'a'..'z')
             a.add(char - 'a' + 10)
         else a.add(char - '0')
-    return decimal(a,base)
+    return decimal(a, base)
 }
 
 /**
@@ -305,7 +305,7 @@ fun decimalFromString(str: String, base: Int): Int {
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
 fun roman(n: Int): String {
-    val roman = listOf("M", "CM","D","CD","C","XC","L","XL","X","IX","V","IV","I")
+    val roman = listOf("M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I")
     val digits = listOf(1000,900,500,400,100,90,50,40,10,9,5,4,1)
     var result = ""
     var a = 0
