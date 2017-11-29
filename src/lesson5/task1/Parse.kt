@@ -201,11 +201,14 @@ fun bestHighJump(jumps: String): Int {
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
 fun plusMinus(expression: String): Int {
+    val sym = listOf("+- 1234567890")
     val parts = expression.split(" ")
     var result: Int
     try {
         result = parts[0].toInt()
         for (i in 1 until parts.size step 2) {
+            if (parts[i] in sym)
+                throw IllegalArgumentException()
             if (parts[i] == "+")
                 result += parts[i + 1].toInt()
             if (parts[i] == "-")
