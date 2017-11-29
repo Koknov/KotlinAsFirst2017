@@ -128,9 +128,8 @@ fun flattenPhoneNumber(phone: String): String {
     val sym = listOf(' ','+','-','(',')')
     var result = ""
     if (phone == "") return ""
+    if (phone[0] in "+") result += "+"
     for (char in phone) {
-        if (char == '+')
-            result += char
         if (char in '0'..'9')
             result += char
         else if (char !in sym)
@@ -154,8 +153,9 @@ fun bestLongJump(jumps: String): Int {
     var max = -1
     for (part in parts) {
         try {
-            if (part.toInt() > max)
-                max = part.toInt()
+            val a = part.toInt()
+            if (a > max)
+                max = a
         }
         catch (e: NumberFormatException) {
             if (part != "") return -1
@@ -182,10 +182,8 @@ fun bestHighJump(jumps: String): Int {
     var max = -1
     for (i in 0 until parts.size)
         try {
-            if (parts[i].any {it == '+'})
-                if (parts[i - 1].matches(Regex("\\d+")))
-                    if (max < parts[i - 1].toInt())
-                        max = parts[i - 1].toInt()
+            if (parts[i].any {it == '+'} && parts[i - 1].matches(Regex("\\d+")) && max < parts[i - 1].toInt())
+                max = parts[i - 1].toInt()
         }
         catch (e: NumberFormatException) {
             if (parts[i] != "") return -1
@@ -204,8 +202,9 @@ fun bestHighJump(jumps: String): Int {
  */
 fun plusMinus(expression: String): Int {
     val parts = expression.split(" ")
-    var result = parts[0].toInt()
+    var result: Int
     try {
+        result = parts[0].toInt()
         for (i in 1 until parts.size step 2) {
             if (parts[i] == "+")
                 result += parts[i + 1].toInt()
