@@ -93,7 +93,7 @@ fun dateStrToDigit(str: String): String {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateDigitToStr(digital: String): String {
-    val months = listOf("", "января", "февраля", "марта", "апреля", "мая", "июня",
+    val months = listOf("января", "февраля", "марта", "апреля", "мая", "июня",
             "июля", "августа", "сентября", "октября", "ноября", "декабря")
     val parts = digital.split(".")
     try {
@@ -101,7 +101,7 @@ fun dateDigitToStr(digital: String): String {
         if ("00" in parts) return ""
         if (parts[1].toInt() !in 1..12) return ""
         val day = parts[0].toInt()
-        val month = months[parts[1].toInt()]
+        val month = months[parts[1].toInt() - 1]
         val year = parts[2].toInt()
         return if (month in months)
             String.format("%d %s %d", day, month, year)
@@ -129,12 +129,16 @@ fun flattenPhoneNumber(phone: String): String {
     var result = ""
     if (phone == "") return ""
     if (phone[0] in "+") result += "+"
+    var a = 0
     for (char in phone) {
+        if (char == '+')
+            a++
         if (char in '0'..'9')
             result += char
         else if (char !in sym)
             return ""
     }
+    if (a > 1) return ""
     return result
 }
 
@@ -201,7 +205,7 @@ fun bestHighJump(jumps: String): Int {
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
 fun plusMinus(expression: String): Int {
-    val sym = listOf("+- 1234567890")
+    val sym = listOf('+','-',' ','0'-'9')
     val parts = expression.split(" ")
     var result: Int
     try {
