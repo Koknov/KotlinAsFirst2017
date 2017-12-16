@@ -138,7 +138,7 @@ fun flattenPhoneNumber(phone: String): String {
         else if (phone[i] !in sym)
             return ""
     }
-    if (a > 0) return ""
+    if (a > 0 || result == "+") return ""
     return result
 }
 
