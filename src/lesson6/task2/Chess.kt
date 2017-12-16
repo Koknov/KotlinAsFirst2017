@@ -21,7 +21,12 @@ data class Square(val column: Int, val row: Int) {
      * В нотации, колонки обозначаются латинскими буквами от a до h, а ряды -- цифрами от 1 до 8.
      * Для клетки не в пределах доски вернуть пустую строку
      */
-    fun notation(): String = TODO()
+    fun notation(): String {
+        val r = "abcdefgh"
+        return if (inside())
+            r[column - 1] + row.toString()
+        else ""
+    }
 }
 
 /**
@@ -31,7 +36,12 @@ data class Square(val column: Int, val row: Int) {
  * В нотации, колонки обозначаются латинскими буквами от a до h, а ряды -- цифрами от 1 до 8.
  * Если нотация некорректна, бросить IllegalArgumentException
  */
-fun square(notation: String): Square = TODO()
+fun square(notation: String): Square {
+    val map = mapOf('a' to 1, 'b' to 2, 'c' to 3, 'd' to 4, 'e' to 5, 'f' to 6, 'g' to 7, 'h' to 8)
+    val c = map[notation[0]] ?: throw IllegalArgumentException()
+    val r = notation[1].toString().toInt()
+    return Square(c, r)
+}
 
 /**
  * Простая
@@ -56,7 +66,12 @@ fun square(notation: String): Square = TODO()
  * Пример: rookMoveNumber(Square(3, 1), Square(6, 3)) = 2
  * Ладья может пройти через клетку (3, 3) или через клетку (6, 1) к клетке (6, 3).
  */
-fun rookMoveNumber(start: Square, end: Square): Int = TODO()
+fun rookMoveNumber(start: Square, end: Square): Int = when {
+    !start.inside() || !end.inside() -> throw IllegalArgumentException()
+    start == end -> 0
+    start.column == end.column || start.row == end.row -> 1
+    else -> 2
+}
 
 /**
  * Средняя
@@ -72,7 +87,14 @@ fun rookMoveNumber(start: Square, end: Square): Int = TODO()
  *          rookTrajectory(Square(3, 5), Square(8, 5)) = listOf(Square(3, 5), Square(8, 5))
  * Если возможно несколько вариантов самой быстрой траектории, вернуть любой из них.
  */
-fun rookTrajectory(start: Square, end: Square): List<Square> = TODO()
+fun rookTrajectory(start: Square, end: Square): List<Square> {
+    val result = mutableListOf(start)
+    if (start != end) {
+        if (rookMoveNumber(start, end) == 2) result.add(Square(start.column, end.row))
+        result.add(end)
+    }
+    return result
+}
 
 /**
  * Простая
@@ -97,7 +119,13 @@ fun rookTrajectory(start: Square, end: Square): List<Square> = TODO()
  * Примеры: bishopMoveNumber(Square(3, 1), Square(6, 3)) = -1; bishopMoveNumber(Square(3, 1), Square(3, 7)) = 2.
  * Слон может пройти через клетку (6, 4) к клетке (3, 7).
  */
-fun bishopMoveNumber(start: Square, end: Square): Int = TODO()
+fun bishopMoveNumber(start: Square, end: Square): Int = when {
+    !start.inside() || !end.inside() -> throw IllegalArgumentException()
+    start == end -> 0
+    Math.abs(start.row - end.row) == Math.abs(start.column - end.column) -> 1
+    (start.row + end.row) % 2 != (start.column + end.column) % 2 -> -1
+    else -> 2
+}
 
 /**
  * Сложная
@@ -117,7 +145,23 @@ fun bishopMoveNumber(start: Square, end: Square): Int = TODO()
  *          bishopTrajectory(Square(1, 3), Square(6, 8)) = listOf(Square(1, 3), Square(6, 8))
  * Если возможно несколько вариантов самой быстрой траектории, вернуть любой из них.
  */
-fun bishopTrajectory(start: Square, end: Square): List<Square> = TODO()
+fun bishopTrajectory(start: Square, end: Square): List<Square> {
+    val result = mutableListOf(start)
+    if (bishopMoveNumber(start, end) == -1) return listOf()
+    if (start != end) {
+        if (bishopMoveNumber(start, end) == 2)
+            for (i in 1..8)
+                for (j in 1..8)
+                    if (Math.abs(start.column - i) == Math.abs(start.row - j) && Math.abs(end.column - i) == Math.abs(end.row - j)) {
+                        result.add(Square(i, j))
+                        result.add(end)
+                        return result
+
+                    }
+        result.add(end)
+    }
+    return result
+}
 
 /**
  * Средняя
@@ -181,6 +225,7 @@ fun kingTrajectory(start: Square, end: Square): List<Square> = TODO()
  * Конь может последовательно пройти через клетки (5, 2) и (4, 4) к клетке (6, 3).
  */
 fun knightMoveNumber(start: Square, end: Square): Int = TODO()
+
 
 /**
  * Очень сложная

@@ -128,17 +128,17 @@ fun flattenPhoneNumber(phone: String): String {
     val sym = listOf(' ','+','-','(',')')
     var result = ""
     if (phone == "") return ""
-    if (phone[0] in "+") result += "+"
     var a = 0
-    for (char in phone) {
-        if (char == '+')
-            a++
-        if (char in '0'..'9')
-            result += char
-        else if (char !in sym)
+    for (i in  0 until phone.length) {
+        if (phone[i] == '+')
+            if (i == 0) result += "+"
+            else a++
+        if (phone[i] in '0'..'9')
+            result += phone[i]
+        else if (phone[i] !in sym)
             return ""
     }
-    if (a > 1) return ""
+    if (a > 0) return ""
     return result
 }
 

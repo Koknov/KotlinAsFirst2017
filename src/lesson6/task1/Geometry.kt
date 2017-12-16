@@ -110,15 +110,15 @@ fun diameter(vararg points: Point): Segment {
     var a = points[1]
     var b = points[0]
     var max = points[0].distance(points[1])
-    for (i in points)
-        for (j in points)
+    for (i in 0 until points.size)
+        for (j in i +  1 until points.size)
             if (i != j)
-                if (i.distance(j) > max) {
-                    max = i.distance(j)
-                    a = i
-                    b = j
+                if (points[i].distance(points[j]) > max) {
+                    max = points[i].distance(points[j])
+                    a = points[i]
+                    b = points[j]
                 }
-    return (Segment(a, b))
+    return Segment(a, b)
 }
 
 /**
@@ -187,6 +187,7 @@ fun lineByPoints(a: Point, b: Point): Line = TODO()
  * Построить серединный перпендикуляр по отрезку или по двум точкам
  */
 fun bisectorByPoints(a: Point, b: Point): Line = TODO()
+
 
 /**
  * Средняя
