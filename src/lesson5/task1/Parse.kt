@@ -210,7 +210,7 @@ fun plusMinus(expression: String): Int {
     var result: Int
     try {
         result = parts[0].toInt()
-        for (i in 1 until parts.size step 2) {
+        for (i in 1 until parts.size) {
             if (parts[i] in sym)
                 throw IllegalArgumentException()
             if (parts[i] == "+")
