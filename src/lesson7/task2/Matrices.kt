@@ -1,6 +1,7 @@
 @file:Suppress("UNUSED_PARAMETER")
 package lesson7.task2
 
+import lesson7.task1.Cell
 import lesson7.task1.Matrix
 import lesson7.task1.createMatrix
 
@@ -90,7 +91,21 @@ fun generateRectangles(height: Int, width: Int): Matrix<Int> = TODO()
  * 10 13 16 18
  * 14 17 19 20
  */
-fun generateSnake(height: Int, width: Int): Matrix<Int> = TODO()
+fun generateSnake(height: Int, width: Int): Matrix<Int> {
+    var num = 1
+    val result = createMatrix(height, width, 1)
+    for (i in 0 until width)
+        for (j in 0 until minOf(i + 1, height)) {
+            result[j, i - j] = num
+            num++
+        }
+    for (i in 1 until height)
+        for (j in 0 until minOf(height - i, width)) {
+            result[j + i, width - j - 1] = num
+            num++
+        }
+    return result
+}
 
 /**
  * Средняя
